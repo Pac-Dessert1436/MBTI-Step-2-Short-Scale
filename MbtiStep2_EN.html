@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI Step 2 Cognitive Function Assessment (Short Version) - Jungian Eight-Dimensional Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .notice-box {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #744210;
+            margin-top: 20px;
+        }
+
+        .notice-box strong {
+            color: #c05621;
+        }
+
+        .progress-container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+
+        .question-card.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dimension-label {
+            display: inline-block;
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            position: relative;
+            padding: 16px 20px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #ebf8ff;
+            border-color: #4299e1;
+            color: #2b6cb0;
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-radio {
+            border-color: #4299e1;
+            background: #4299e1;
+        }
+
+        .option.selected .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results-container {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .results-header {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .cognitive-chart {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .chart-title {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .dimension-bar {
+            margin-bottom: 20px;
+        }
+
+        .dimension-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .dimension-name {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .dimension-score {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .bar-bg {
+            height: 24px;
+            background: #edf2f7;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .bar-fill.se {
+            background: linear-gradient(90deg, #f6ad55, #ed8936);
+        }
+
+        .bar-fill.si {
+            background: linear-gradient(90deg, #68d391, #48bb78);
+        }
+
+        .bar-fill.ne {
+            background: linear-gradient(90deg, #63b3ed, #4299e1);
+        }
+
+        .bar-fill.ni {
+            background: linear-gradient(90deg, #9f7aea, #805ad5);
+        }
+
+        .bar-fill.te {
+            background: linear-gradient(90deg, #fc8181, #f56565);
+        }
+
+        .bar-fill.ti {
+            background: linear-gradient(90deg, #4fd1c5, #38b2ac);
+        }
+
+        .bar-fill.fe {
+            background: linear-gradient(90deg, #f687b3, #ed64a6);
+        }
+
+        .bar-fill.fi {
+            background: linear-gradient(90deg, #f6e05e, #d69e2e);
+        }
+
+        .interpretation {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .interpretation h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .function-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .function-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .function-card.dominant {
+            border-left-color: #805ad5;
+            background: #faf5ff;
+        }
+
+        .function-card.auxiliary {
+            border-left-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .function-card.tertiary {
+            border-left-color: #48bb78;
+            background: #f0fff4;
+        }
+
+        .function-card.inferior {
+            border-left-color: #ed8936;
+            background: #fffaf0;
+        }
+
+        .function-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .function-desc {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .disclaimer {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #c53030;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .restart-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto 0;
+            padding: 16px;
+            background: #2d3748;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #1a202c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header,
+            .question-card,
+            .results-header,
+            .cognitive-chart,
+            .interpretation {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header" id="introSection">
+            <h1>MBTI Step 2 Cognitive Function Assessment (Academic Short Version)</h1>
+            <div class="subtitle">Based on Carl Jung's Psychological Type Theory · Eight-Dimensional Cognitive Function Assessment · Non-Commercial Academic Tool</div>
+
+            <p style="color: #4a5568; margin-bottom: 15px; font-size: 15px;">
+                This assessment uses the <strong>Jungian Eight-Dimensional Cognitive Function Model</strong> (Se/Si/Ne/Ni/Te/Ti/Fe/Fi), with 5 situational questions per dimension, totaling 40 questions.
+                Unlike Step 1's simple four-dimensional labels, this assessment focuses on your <strong>Cognitive Function Stack</strong>,
+                helping you understand the psychological mechanisms behind your thinking preferences rather than fixed personality labels.
+            </p>
+
+            <div class="notice-box">
+                <strong>⚠️ Important Notice:</strong> This tool is a <strong>non-commercial academic reference tool</strong> developed by psychology enthusiasts based on Jung's original work "Psychological Types" and the MBTI Step 2 theoretical framework, intended for self-exploration purposes only. It does not constitute psychological diagnosis and does not infringe on any commercial assessment copyrights. Result interpretations are based on open-source psychological literature, and it is recommended to combine with professional psychological counseling for interpretation.
+            </div>
+
+            <button class="btn btn-primary" style="margin-top: 25px; width: 100%;" onclick="startAssessment()">
+                Start Assessment (approximately 8-10 minutes)
+            </button>
+        </div>
+
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-text">
+                <span>Assessment Progress</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div id="questionsContainer" style="display: none;">
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="results-header">
+                <h2 style="color: #2d3748; margin-bottom: 10px;">Your Cognitive Function Profile</h2>
+                <p style="color: #718096; font-size: 16px;">Based on Jungian Eight-Dimensional Theory Function Strength Distribution</p>
+            </div>
+
+            <div class="cognitive-chart">
+                <div class="chart-title">Eight-Dimensional Cognitive Function Strength Radar (Maximum 25 points)</div>
+                <div id="chartContainer">
+                </div>
+            </div>
+
+            <div class="interpretation">
+                <h3>Your Cognitive Function Stack Analysis</h3>
+                <p style="color: #4a5568; margin-bottom: 20px; font-size: 15px;">
+                    According to Jungian theory, personality consists of four main cognitive functions: Dominant, Auxiliary, Tertiary, and Inferior.
+                    Below are your possible function combination patterns:
+                </p>
+                <div class="function-stack" id="functionStack">
+                </div>
+            </div>
+
+            <div class="interpretation">
+                <h3>Detailed Dimension Interpretation</h3>
+                <div id="detailedInterpretation" style="color: #4a5568; line-height: 1.8;">
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This assessment result is for reference only and does not represent professional psychological diagnosis. Cognitive functions may change with age, environment, and conscious development. For in-depth personality analysis, it is recommended to consult a licensed psychological counselor or refer to Jung's original work "Psychological Types".
+            </div>
+
+            <button class="restart-btn" onclick="restartAssessment()">
+                Restart Assessment
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                dimension: 'Se', text: 'When you enter a new environment, what do you notice first?',
+                options: ['Specific details (lighting, sounds, smells, layout)', 'Overall atmosphere and potential possibilities', 'Logical structure and operation of the environment', 'Interpersonal relationships and emotional atmosphere in the environment']
+            },
+            {
+                dimension: 'Se', text: 'When solving problems, you tend to:',
+                options: ['Take immediate action, learning through trial and error', 'Review past experiences to find similar cases', 'Explore multiple possible innovative solutions', 'Deeply analyze the underlying principles of the problem']
+            },
+            {
+                dimension: 'Se', text: 'Activities you enjoy more are:',
+                options: ['Sports, crafts, live performances and other sensory experiences', 'Reading history, collecting, traditional crafts', 'Brainstorming, creative writing, exploring new fields', 'Strategic planning, philosophical thinking, long-term planning']
+            },
+            {
+                dimension: 'Se', text: 'When facing stress, you usually:',
+                options: ['Release stress through specific activities (exercise, food, travel)', 'Rely on familiar routines and past experiences to comfort yourself', 'Imagine various possibilities to distract attention', 'Re-understand the source of stress from a higher perspective']
+            },
+            {
+                dimension: 'Se', text: 'Your way of learning new skills is usually:',
+                options: ['Learn by doing, master through body memory', 'Learn according to traditional methods and standard steps', 'Try multiple different learning paths', 'Understand the underlying principles before practicing']
+            },
+
+            {
+                dimension: 'Si', text: 'You usually remember past experiences by:',
+                options: ['Specific sensory details (weather, clothing, smells at the time)', 'Extracting abstract concepts and patterns', 'Associating with other possible development paths', 'Analyzing the causal relationships behind events']
+            },
+            {
+                dimension: 'Si', text: 'At work, you value more:',
+                options: ['Following verified standard procedures', 'Creating completely new working methods', 'Adapting to team harmony', 'Establishing clear logical systems']
+            },
+            {
+                dimension: 'Si', text: 'Your view on health management is:',
+                options: ['Adjust lifestyle habits based on past body reactions', 'Try various novel health methods', 'Refer to authoritative medical advice and statistical data', 'Adjust flexibly based on internal body feelings']
+            },
+            {
+                dimension: 'Si', text: 'When traveling, you prefer:',
+                options: ['Revisiting familiar places, looking for traces of the past', 'Exploring completely unfamiliar destinations', 'Establishing deep emotional connections with locals', 'Understanding local historical and cultural context']
+            },
+            {
+                dimension: 'Si', text: 'When making decisions, you rely more on:',
+                options: ['Results of similar past situations and personal experience', 'Intuitive possibilities and inspiration', 'Objective data and logical analysis', 'Current emotional value and interpersonal relationships']
+            },
+
+            {
+                dimension: 'Ne', text: 'In brainstorming, you usually:',
+                options: ['Quickly generate many different ideas with jumping associations', 'Deeply explore the deeper meaning of one idea', 'Focus on the practical feasibility of ideas', 'Evaluate the impact of ideas on team emotions']
+            },
+            {
+                dimension: 'Ne', text: 'Topics you are more interested in are:',
+                options: ['Cross-disciplinary connections, future trends, innovative concepts', 'Specific technical details and operation manuals', 'Subtle emotional changes in interpersonal interactions', 'Systematic theoretical framework construction']
+            },
+            {
+                dimension: 'Ne', text: 'When reading articles, you often:',
+                options: ['Associate with many other related or unrelated viewpoints', 'Carefully remember specific facts in the article', 'Analyze whether the article\'s argumentation logic is rigorous', 'Experience the author\'s emotional attitude and values']
+            },
+            {
+                dimension: 'Ne', text: 'Your way of planning the future is:',
+                options: ['Stay open, adjust direction anytime based on new opportunities', 'Make detailed long-term plans and execute strictly', 'Predict future trends based on past experience', 'Determine life direction starting from core values']
+            },
+            {
+                dimension: 'Ne', text: 'In social situations, you tend to:',
+                options: ['Jump between different topics, connecting various ideas', 'Deeply discuss details of a specific topic', 'Focus on current sensory experiences and atmosphere', 'Maintain harmonious interpersonal relationship atmosphere']
+            },
+
+            {
+                dimension: 'Ni', text: 'Your way of generating inspiration is usually:',
+                options: ['Sudden epiphany, seeing hidden patterns behind things', 'Generating associations through massive external information stimulation', 'Sudden enlightenment based on accumulated past experience', 'Drawing conclusions through logical deduction']
+            },
+            {
+                dimension: 'Ni', text: 'Your view of the future is:',
+                options: ['A vague certainty, knowing the general direction', 'Full of various open possibilities', 'Specific predictions based on current trends', 'Focus on current practical experiences']
+            },
+            {
+                dimension: 'Ni', text: 'In complex situations, you trust more:',
+                options: ['Inner intuition and premonitions', 'Observable facts and data', 'Verified traditional methods', 'Logical analysis and causal reasoning']
+            },
+            {
+                dimension: 'Ni', text: 'Your way of expressing viewpoints is usually:',
+                options: ['Using metaphors and symbols, hard to express but meaningful', 'Listing many specific examples', 'Building rigorous logical arguments', 'Directly stating emotional positions']
+            },
+            {
+                dimension: 'Ni', text: 'The goals you pursue are:',
+                options: ['Realizing inner visions and life missions', 'Gaining rich sensory experiences', 'Mastering objective knowledge and skills', 'Maintaining important interpersonal relationships']
+            },
+
+            {
+                dimension: 'Te', text: 'Your way of organizing work is:',
+                options: ['Setting clear goals, processes, and measurable standards', 'Adjust flexibly based on team harmony', 'Exploring multiple possible execution plans', 'Deeply understanding the principles behind work']
+            },
+            {
+                dimension: 'Te', text: 'You think good decisions should:',
+                options: ['Be based on objective data and verifiable results', 'Consider the emotional impact on all relevant personnel', 'Maintain openness and adaptability', 'Conform to internal logical consistency']
+            },
+            {
+                dimension: 'Te', text: 'In arguments, you value more:',
+                options: ['Which side has a more efficient and executable plan', 'Which side better maintains relationship harmony', 'Which side has more unique and innovative viewpoints', 'Which side has more rigorous and self-consistent logic']
+            },
+            {
+                dimension: 'Te', text: 'Your criteria for evaluating others are:',
+                options: ['Their achievements, efficiency, and actual output', 'Their sincerity and value consistency', 'Their creativity and unique perspectives', 'Their knowledge depth and logical ability']
+            },
+            {
+                dimension: 'Te', text: 'Facing chaotic situations, you first:',
+                options: ['Establish order, assign tasks, set deadlines', 'Soothe all parties\' emotions, seek consensus', 'Look for hidden opportunities and possibilities', 'Analyze the root causes of chaos']
+            },
+
+            {
+                dimension: 'Ti', text: 'When understanding new things, you value most:',
+                options: ['Whether its internal logic is self-consistent and classification is precise', 'Its practical application value and efficiency', 'Its significance to personal emotions', 'Its connection possibilities with the external world']
+            },
+            {
+                dimension: 'Ti', text: 'The reason you stick to your views is:',
+                options: ['After rigorous logical deduction, believing the viewpoint itself is correct', 'Emotionally unable to accept other options', 'Intuitively feeling it should be so', 'Past experience proves this is effective']
+            },
+            {
+                dimension: 'Ti', text: 'Your preference for learning theories is:',
+                options: ['Building precise classification systems and conceptual frameworks', 'Learning practical skills that can be directly applied', 'Exploring various application possibilities of theories', 'Understanding the deep meaning of theories for life']
+            },
+            {
+                dimension: 'Ti', text: 'When analyzing problems, you tend to:',
+                options: ['Break down to the most basic elements, redefine concepts', 'Find the fastest and most effective solution', 'Consider multiple possible interpretation angles', 'Focus on the impact of problems on people']
+            },
+            {
+                dimension: 'Ti', text: 'Your view on "truth" is:',
+                options: ['A system that is logically self-consistent and internally consistent', 'Experience verified through practice', 'Beliefs that align with personal values', 'Multiple interpretations that change with context']
+            },
+
+            {
+                dimension: 'Fe', text: 'In team decision-making, you focus most on:',
+                options: ['Ensuring everyone\'s feelings are considered, maintaining team harmony', 'Objective rationality and efficiency of decisions', 'Whether decisions conform to logical truth', 'Whether decisions reflect unique innovation']
+            },
+            {
+                dimension: 'Fe', text: 'Your way of expressing criticism is usually:',
+                options: ['Subtle hints, considering the other person\'s face, avoiding hurting relationships', 'Directly pointing out problems, focusing on facts themselves', 'Analyzing why it\'s wrong from a principle level', 'Using humor or changing topics to resolve']
+            },
+            {
+                dimension: 'Fe', text: 'You believe your responsibility to others is:',
+                options: ['Maintaining the group\'s emotional atmosphere and moral consensus', 'Helping others solve practical problems', 'Inspiring others to see new possibilities', 'Respecting others\' inner uniqueness']
+            },
+            {
+                dimension: 'Fe', text: 'In social activities, you:',
+                options: ['Keenly perceive group emotions, actively adjust the atmosphere', 'Focus on factual accuracy in conversations', 'Introduce novel topics to stimulate discussion', 'Observe but don\'t easily intervene in others\' interactions']
+            },
+            {
+                dimension: 'Fe', text: 'When making moral judgments, you base on:',
+                options: ['Impact on group harmony and well-being', 'Universally applicable logical principles', 'Personal unique value experiences', 'Long-term historical development trends']
+            },
+
+            {
+                dimension: 'Fi', text: 'Your way of forming values is:',
+                options: ['Gradually internalizing through profound personal experience, very unique', 'Adapting to social norms and others\' expectations', 'Based on logical analysis and objective facts', 'Staying open and changing with context']
+            },
+            {
+                dimension: 'Fi', text: 'When others ask for help, you first consider:',
+                options: ['Whether this aligns with my core values and true feelings', 'What is the most effective solution', 'Various possible ways to help', 'Group expectations and conventional practices']
+            },
+            {
+                dimension: 'Fi', text: 'Your way of expressing emotions is:',
+                options: ['Selectively showing deep emotions to trusted people', 'Natural expression, adapting to social occasion atmosphere', 'Expressing through actions and practical help', 'Transforming emotions into artistic creation or conceptual expression']
+            },
+            {
+                dimension: 'Fi', text: 'Your understanding of "being yourself" is:',
+                options: ['Faithful to inner values, even if contrary to worldly norms', 'Playing a unique role in the group', 'Mastering unique skills and knowledge', 'Staying open and adapting to various roles']
+            },
+            {
+                dimension: 'Fi', text: 'When facing conflict, you usually:',
+                options: ['Avoid surface arguments but stick to inner positions', 'Face conflict directly, solve problems quickly', 'Look for win-win innovative solutions', 'Analyze the essential causes of conflict']
+            }
+        ];
+
+        let currentQuestion = 0;
+        let scores = {
+            Se: 0, Si: 0, Ne: 0, Ni: 0,
+            Te: 0, Ti: 0, Fe: 0, Fi: 0
+        };
+        let answers = [];
+
+        function shuffleQuestions() {
+            const dimensionGroups = {};
+            questions.forEach(q => {
+                if (!dimensionGroups[q.dimension]) dimensionGroups[q.dimension] = [];
+                dimensionGroups[q.dimension].push(q);
+            });
+
+            let shuffled = [];
+            Object.keys(dimensionGroups).forEach(dim => {
+                const group = dimensionGroups[dim];
+                for (let i = group.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [group[i], group[j]] = [group[j], group[i]];
+                }
+                shuffled = shuffled.concat(group);
+            });
+
+            return shuffled;
+        }
+
+        let shuffledQuestions = [];
+
+        function startAssessment() {
+            document.getElementById('introSection').style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('questionsContainer').style.display = 'block';
+
+            shuffledQuestions = shuffleQuestions();
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            const q = shuffledQuestions[currentQuestion];
+            const card = document.createElement('div');
+            card.className = 'question-card active';
+
+            const dimensionNames = {
+                'Se': 'Extraverted Sensing (Se)', 'Si': 'Introverted Sensing (Si)',
+                'Ne': 'Extraverted Intuition (Ne)', 'Ni': 'Introverted Intuition (Ni)',
+                'Te': 'Extraverted Thinking (Te)', 'Ti': 'Introverted Thinking (Ti)',
+                'Fe': 'Extraverted Feeling (Fe)', 'Fi': 'Introverted Feeling (Fi)'
+            };
+
+            card.innerHTML = `
+            <div class="dimension-label">${dimensionNames[q.dimension]} · Question ${currentQuestion + 1}/40</div>
+            <div class="question-text">${q.text}</div>
+            <div class="options">
+                ${q.options.map((opt, idx) => `
+                    <div class="option" onclick="selectOption(${idx})">
+                        <div class="option-radio"></div>
+                        <div>${opt}</div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>Previous</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        `;
+
+            container.appendChild(card);
+            updateProgress();
+        }
+
+        let selectedOption = null;
+
+        function selectOption(index) {
+            selectedOption = index;
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, idx) => {
+                if (idx === index) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedOption === null) return;
+
+            const currentQ = shuffledQuestions[currentQuestion];
+            const points = selectedOption === 0 ? 4 : (selectedOption === 1 ? 2 : 1);
+            scores[currentQ.dimension] += points;
+            answers.push({
+                dimension: currentQ.dimension,
+                choice: selectedOption,
+                points: points
+            });
+
+            selectedOption = null;
+            currentQuestion++;
+
+            if (currentQuestion < shuffledQuestions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                const lastAnswer = answers.pop();
+                scores[lastAnswer.dimension] -= lastAnswer.points;
+                selectedOption = null;
+                renderQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const percent = Math.round((currentQuestion / shuffledQuestions.length) * 100);
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+
+        function showResults() {
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('questionsContainer').style.display = 'none';
+            document.getElementById('resultsContainer').style.display = 'block';
+
+            renderChart();
+            renderFunctionStack();
+            renderInterpretation();
+        }
+
+        function renderChart() {
+            const container = document.getElementById('chartContainer');
+            const dimensions = [
+                { key: 'Se', name: 'Extraverted Sensing Se', color: 'se' },
+                { key: 'Si', name: 'Introverted Sensing Si', color: 'si' },
+                { key: 'Ne', name: 'Extraverted Intuition Ne', color: 'ne' },
+                { key: 'Ni', name: 'Introverted Intuition Ni', color: 'ni' },
+                { key: 'Te', name: 'Extraverted Thinking Te', color: 'te' },
+                { key: 'Ti', name: 'Introverted Thinking Ti', color: 'ti' },
+                { key: 'Fe', name: 'Extraverted Feeling Fe', color: 'fe' },
+                { key: 'Fi', name: 'Introverted Feeling Fi', color: 'fi' }
+            ];
+
+            const maxScore = 20;
+
+            dimensions.forEach(dim => {
+                const score = scores[dim.key];
+                const percent = (score / maxScore) * 100;
+
+                const barDiv = document.createElement('div');
+                barDiv.className = 'dimension-bar';
+                barDiv.innerHTML = `
+                <div class="dimension-info">
+                    <span class="dimension-name">${dim.name}</span>
+                    <span class="dimension-score">${score}/20 (${Math.round(percent)}%)</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill ${dim.color}" style="width: ${percent}%">
+                        ${score >= 8 ? score : ''}
+                    </div>
+                </div>
+            `;
+                container.appendChild(barDiv);
+            });
+        }
+
+        function renderFunctionStack() {
+            const sortedDims = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+            const positions = ['dominant', 'auxiliary', 'tertiary', 'inferior'];
+            const positionNames = ['Dominant Function', 'Auxiliary Function', 'Tertiary Function', 'Inferior Function'];
+
+            const descriptions = {
+                'Se': 'Living in the present, experiencing reality directly through senses, strong action ability, adapting to environmental changes',
+                'Si': 'Relying on past experiences, valuing details and accuracy, maintaining traditions and stability',
+                'Ne': 'Exploring possibilities, rich associations, good at discovering potential connections and innovative solutions',
+                'Ni': 'Insight into deep patterns, foreseeing future trends, pursuing inner visions and meaning',
+                'Te': 'Focusing on efficiency and results, good at organizing resources, setting objective standards to achieve goals',
+                'Ti': 'Pursuing precise classification and logical self-consistency, analyzing principles, building internal knowledge systems',
+                'Fe': 'Maintaining group harmony, keenly perceiving others\' emotions, making value judgments based on consensus',
+                'Fi': 'Faithful to inner values, deeply experiencing personal emotions, pursuing authentic self-expression'
+            };
+
+            const container = document.getElementById('functionStack');
+            container.innerHTML = '';
+
+            for (let i = 0; i < 4; i++) {
+                const dim = sortedDims[i];
+                const card = document.createElement('div');
+                card.className = `function-card ${positions[i]}`;
+                card.innerHTML = `
+                <div class="function-title">${positionNames[i]}: ${dim} (${scores[dim]} points)</div>
+                <div class="function-desc">${descriptions[dim]}</div>
+            `;
+                container.appendChild(card);
+            }
+        }
+
+        function renderInterpretation() {
+            const container = document.getElementById('detailedInterpretation');
+
+            const e = scores.Se + scores.Ne + scores.Te + scores.Fe;
+            const i = scores.Si + scores.Ni + scores.Ti + scores.Fi;
+            const s = scores.Se + scores.Si;
+            const n = scores.Ne + scores.Ni;
+            const t = scores.Te + scores.Ti;
+            const f = scores.Fe + scores.Fi;
+            const j = scores.Te + scores.Fe + scores.Si + scores.Ni;
+            const p = scores.Ti + scores.Fi + scores.Se + scores.Ne;
+
+            const type = (e > i ? 'E' : 'I') + (s > n ? 'S' : 'N') + (t > f ? 'T' : 'F') + (j > p ? 'J' : 'P');
+
+            const perceiving = scores.Se > scores.Si ? 'Se' : 'Si';
+            const perceiving2 = scores.Ne > scores.Ni ? 'Ne' : 'Ni';
+            const judging = scores.Te > scores.Ti ? 'Te' : 'Ti';
+            const judging2 = scores.Fe > scores.Fi ? 'Fe' : 'Fi';
+
+            const dominantP = scores[perceiving] > scores[perceiving2] ? perceiving : perceiving2;
+            const dominantJ = scores[judging] > scores[judging2] ? judging : judging2;
+            const dominant = scores[dominantP] > scores[dominantJ] ? dominantP : dominantJ;
+
+            let html = `
+            <p style="margin-bottom: 20px;"><strong>Possible Type Tendency:</strong> ${type} (For reference only, cognitive functions describe you better than four-letter labels)</p>
+            
+            <p style="margin-bottom: 15px;"><strong>Core Cognitive Pattern Analysis:</strong></p>
+            
+            <p style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #e2e8f0;">
+                Your <strong>dominant function</strong> appears to be <strong>${dominant}</strong>, which means your most natural and trusted cognitive method is 
+                ${dominant.startsWith('S') || dominant.startsWith('N') ? 'Perceiving' : 'Judging'} 
+                ${dominant.startsWith('E') ? 'Extraverted' : 'Introverted'} mode.
+            </p>
+            
+            <p style="margin-bottom: 15px;">
+                <strong>Development Suggestions:</strong><br>
+                1. <strong>Strengthen dominant function:</strong> Continue developing your most skilled ${dominant} ability, this is your core advantage.<br>
+                2. <strong>Cultivate inferior function:</strong> Consciously exercise the lowest-scoring function to achieve cognitive balance.<br>
+                3. <strong>Avoid over-identification:</strong> Jung emphasized the wholeness of personality, avoid over-developing one function while suppressing others.
+            </p>
+            
+            <p style="font-size: 14px; color: #718096; margin-top: 20px; font-style: italic;">
+                Note: This interpretation is based on Jungian analytical psychology principles. The essence of Step 2 assessment is understanding the dynamic interaction of cognitive functions, not static labels.
+                Your cognitive function stack may present different aspects in different contexts and life stages.
+            </p>
+        `;
+
+            container.innerHTML = html;
+        }
+
+        function restartAssessment() {
+            currentQuestion = 0;
+            scores = { Se: 0, Si: 0, Ne: 0, Ni: 0, Te: 0, Ti: 0, Fe: 0, Fi: 0 };
+            answers = [];
+            selectedOption = null;
+
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('chartContainer').innerHTML = '';
+            document.getElementById('functionStack').innerHTML = '';
+            document.getElementById('introSection').style.display = 'block';
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+
+</html>
